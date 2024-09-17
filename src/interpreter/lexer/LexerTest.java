@@ -8,8 +8,6 @@ import static interpreter.token.Token.TokenType;
 
 public class LexerTest {
 
-    private Token token;
-
     @Test
     public void testNextToken() {
         String input = """

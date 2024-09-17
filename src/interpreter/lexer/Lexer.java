@@ -29,11 +29,11 @@ public class Lexer {
     }
 
     public Token nextToken() {
+        Token token;
 
-        Token token = new Token();
         spaceEater();
-
         final String character = string(this.ch);
+
         switch (character) {
             case "=":
                 token = new Token(TokenType.ASSIGN, character);
@@ -60,15 +60,22 @@ public class Lexer {
                 token = new Token(TokenType.RBRACE, character);
                 break;
             case "0":
+                token = new Token();
                 token.setLiteral("");
                 token.setType(TokenType.EOF);
             default:
                 if (isLetter(this.ch)) {
+
+                    token = new Token();
                     token.setLiteral(readIdentifier());
+
                     token.setType(token.lookupIdentifier(token.getLiteral()));
                     return token;
                 } else if (isDigit(this.ch)) {
+
+                    token = new Token();
                     token.setType(TokenType.INT);
+
                     token.setLiteral(readNumber());
                     return token;
                 } else {
@@ -80,8 +87,7 @@ public class Lexer {
     }
 
     private void spaceEater() {
-        while (this.ch == ' ' || this.ch == '\n' || this.ch == '\t'
-            || this.ch == '\r') {
+        while (this.ch == ' ' || this.ch == '\n' || this.ch == '\t' || this.ch == '\r') {
             readChar(this.input);
         }
     }

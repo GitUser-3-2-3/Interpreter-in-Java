@@ -1,8 +1,11 @@
 package interpreter.token;
 
+import lombok.Getter;
+
 import java.util.HashMap;
 import java.util.Map;
 
+@Getter
 @SuppressWarnings("ClassCanBeRecord")
 public class Token {
     private final TokenType type;
@@ -13,14 +16,7 @@ public class Token {
         this.literal = literal;
     }
 
-    public TokenType getType() {
-        return type;
-    }
-
-    public String getLiteral() {
-        return literal;
-    }
-
+    @Getter
     public enum TokenType {
         ILLEGAL("ILLEGAL"), EOF("EOF"),
 
@@ -43,9 +39,6 @@ public class Token {
             this.Literal = literal;
         }
 
-        public String getLiteral() {
-            return Literal;
-        }
     }
 
     private static final Map<String, TokenType> keywords = new HashMap<>();

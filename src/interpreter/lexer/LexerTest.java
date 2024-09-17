@@ -18,7 +18,7 @@ public class LexerTest {
             
             let add = fn(x, y) {
                 x + y;
-            }
+            };
             
             let result = add(five, ten);
             """;
@@ -64,7 +64,7 @@ public class LexerTest {
 
         Lexer lexer = new Lexer(input);
         for (int i = 0; i < tests.length; i++) {
-            Token expected = new Token((TokenType) tests[i][0], (String) tests[0][i]);
+            Token expected = new Token((TokenType) tests[i][0], tests[i][1].toString());
             Token actual = lexer.nextToken();
             assertTokenEquals(expected, actual, i);
         }
@@ -72,7 +72,7 @@ public class LexerTest {
 
     private void assertTokenEquals(Token expected, Token actual, int index) {
         Assertions.assertEquals(expected.getType(), actual.getType(),
-            String.format("tests[%d] - TokenType wrong. Expected=%s, Got %s", index, expected, actual));
+            String.format("tests[%d] - TokenType wrong. Expected ==> %s, Got ==> %s", index, expected, actual));
     }
 }
 

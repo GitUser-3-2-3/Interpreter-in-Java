@@ -10,19 +10,20 @@ public class Lexer {
 
     private final String input;
     private int position;
-    private int readPosition;
-    private char ch;
 
-    public Lexer(String input) {
+    private int readPosition;
+    private char character;
+
+    public Lexer(final String input) {
         this.input = input;
         readChar(input);
     }
 
     public void readChar(final String input) {
         if (this.readPosition >= input.length()) {
-            this.ch = 0;
+            this.character = 0;
         } else {
-            this.ch = input.charAt(this.readPosition);
+            this.character = input.charAt(this.readPosition);
         }
         this.position = this.readPosition;
         this.readPosition += 1;
@@ -32,7 +33,7 @@ public class Lexer {
         Token token;
 
         spaceEater();
-        final String character = string(this.ch);
+        final String character = string(this.character);
 
         switch (character) {
             case "=":
@@ -64,14 +65,14 @@ public class Lexer {
                 token.setLiteral("");
                 token.setType(TokenType.EOF);
             default:
-                if (isLetter(this.ch)) {
+                if (isLetter(this.character)) {
 
                     token = new Token();
                     token.setLiteral(readIdentifier());
 
                     token.setType(token.lookupIdentifier(token.getLiteral()));
                     return token;
-                } else if (isDigit(this.ch)) {
+                } else if (isDigit(this.character)) {
 
                     token = new Token();
                     token.setType(TokenType.INT);
@@ -83,18 +84,21 @@ public class Lexer {
                 }
         }
         readChar(this.input);
+
         return token;
     }
 
     private void spaceEater() {
-        while (this.ch == ' ' || this.ch == '\n' || this.ch == '\t' || this.ch == '\r') {
+        while (this.character == ' ' || this.character == '\n' || this.character == '\t'
+            || this.character == '\r') {
             readChar(this.input);
         }
     }
 
     private String readIdentifier() {
         int position = this.position;
-        while (isLetter(this.ch)) {
+
+        while (isLetter(this.character)) {
             readChar(this.input);
         }
         return input.substring(position, this.position);
@@ -102,7 +106,8 @@ public class Lexer {
 
     private String readNumber() {
         int position = this.position;
-        while (isDigit(this.ch)) {
+
+        while (isDigit(this.character)) {
             readChar(this.input);
         }
         return input.substring(position, this.position);

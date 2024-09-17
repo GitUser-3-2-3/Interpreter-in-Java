@@ -18,11 +18,11 @@ public class Lexer {
         readChar(input);
     }
 
-    public void readChar(String input) {
+    public void readChar(final String input) {
         if (this.readPosition >= input.length()) {
             this.ch = 0;
         } else {
-            this.ch = input.charAt(readPosition);
+            this.ch = input.charAt(this.readPosition);
         }
         this.position = this.readPosition;
         this.readPosition += 1;

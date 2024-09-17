@@ -1,15 +1,18 @@
 package interpreter.token;
 
 import lombok.Getter;
+import lombok.Setter;
 
 import java.util.HashMap;
 import java.util.Map;
 
 @Getter
-@SuppressWarnings("ClassCanBeRecord")
+@Setter
 public class Token {
-    private final TokenType type;
-    private final String literal;
+    private TokenType type;
+    private String literal;
+
+    public Token() {}
 
     public Token(TokenType type, String literal) {
         this.type = type;

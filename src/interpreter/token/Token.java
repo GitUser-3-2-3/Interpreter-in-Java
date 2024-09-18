@@ -62,6 +62,14 @@ public class Token {
     public TokenType lookupIdentifier(final String ident) {
         return keywords.getOrDefault(ident, TokenType.IDENT);
     }
+
+    @Override
+    public String toString() {
+        return "Token{" +
+            "type=" + type +
+            ", literal='" + literal + '\'' +
+            '}';
+    }
 }
 
 
